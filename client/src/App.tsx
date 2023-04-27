@@ -1,12 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import Form from "./components/Form";
 import Tasks from "./components/Tasks";
 
-const taskData = [
-  { id: 1, description: "Task 1" },
-  { id: 2, description: "Task 2" },
-  { id: 3, description: "Task 3" },
-];
+import { createTask, getTasks } from "./api";
 
 type Task = {
   id: number;
@@ -14,15 +11,23 @@ type Task = {
 };
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(taskData);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const onSubmit = (task: string) => {
-    const newTask: Task = {
-      id: tasks.length + 1,
-      description: task,
-    };
-    setTasks([...tasks, newTask]);
+  const onSubmit = async (task: string) => {
+    try {
+      await createTask(task);
+      const tasks = await getTasks();
+      setTasks(tasks);
+    } catch (error) {
+      console.error("Error creating task: ", error);
+    }
   };
+
+  useEffect(() => {
+    getTasks().then((tasks) => {
+      setTasks(tasks);
+    });
+  }, []);
 
   return (
     <main className="bg-gradient-to-r from-zinc-500 to-zinc-700 h-screen">

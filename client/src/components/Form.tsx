@@ -9,6 +9,7 @@ const Form = ({ onSubmit }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!input) return;
     onSubmit(input);
     setInput("");
   };
