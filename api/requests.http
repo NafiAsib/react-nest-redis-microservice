@@ -1,0 +1,14 @@
+### check if the server is running
+GET http://localhost:3000/
+
+### get all tasks
+GET http://localhost:3000/tasks
+
+
+### create a task
+POST http://localhost:3000/tasks
+Content-Type: application/json
+
+{
+  "task": "Task 2"
+}
