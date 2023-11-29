@@ -10,5 +10,5 @@ POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
-  "task": "Task 2"
+  "task": "lorem ipsum dolor sit amet"
 }
