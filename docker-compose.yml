@@ -1,12 +1,12 @@
 version: "3"
 services:
   postgres:
-    container_name: pg-rnrm
-    image: postgres:latest
+    container_name: pqsql
+    build: ./db
     ports:
       - "5432:5432"
     volumes:
-      - /data/postgres:/data/postgres
+      - postgres:/data/postgres
     env_file:
       - .env
     networks:
@@ -15,12 +15,12 @@ services:
   pgadmin:
     links:
       - postgres:postgres
-    container_name: pgadmin-rnrm
+    container_name: pgadmin
     image: dpage/pgadmin4
     ports:
       - "8080:80"
     volumes:
-      - /data/pgadmin:/root/.pgadmin
+      - pgadmin:/root/.pgadmin
     env_file:
       - .env
     networks:
@@ -29,3 +29,7 @@ services:
 networks:
   postgres:
     driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
