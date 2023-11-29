@@ -10,7 +10,6 @@ export class TaskService {
   }
 
   create(task: string) {
-    this.taskRepo.create(task);
-    return { message: 'Task created successfully' };
+    return this.taskRepo.create(task);
   }
 }

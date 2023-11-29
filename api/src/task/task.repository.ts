@@ -1,19 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { DatabaseService } from '../database/database.service';
 
 @Injectable()
 export class TaskRepository {
-  tasks = [
-    { id: 1, description: 'Task 11' },
-    { id: 2, description: 'Task 22' },
-    { id: 3, description: 'Task 32' },
-  ];
+  constructor(private databaseService: DatabaseService) {}
 
   findAll() {
-    return this.tasks;
+    return this.databaseService.executeQuery('SELECT * FROM tasks');
   }
 
   create(task: string) {
-    const id = Math.floor(Math.random() * 999);
-    this.tasks.push({ id, description: task });
+    const queryText = 'INSERT INTO tasks(task) VALUES($1)';
+    const values = [task];
+    return this.databaseService.executeQuery(queryText, values);
   }
 }
