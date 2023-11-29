@@ -21,10 +21,13 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.2",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@types/pg": "^8.6.6",
     "class-transformer": "npm:@nestjs/class-transformer@0.4.0",
     "class-validator": "npm:@nestjs/class-validator@0.13.4",
+    "pg": "^8.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
